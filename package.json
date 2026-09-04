@@ -1,0 +1,15 @@
+{
+  "name": "alight-motion-vip",
+  "version": "1.0.0",
+  "description": "Alight Motion VIP - Premium Login System",
+  "private": true,
+  "scripts": {
+    "start": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "engines": {
+    "node": ">=18.x"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
