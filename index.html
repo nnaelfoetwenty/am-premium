@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alight Motion Pro - Premium Login</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com">
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -179,7 +178,8 @@
                     <div class="relative group">
                         <i class="fa-solid fa-user absolute left-4 top-1/2 -translate-y-1/2 text-mono-muted text-xs transition-colors group-focus-within:text-mono-accent"></i>
                         <input type="text" id="username" required placeholder="Masukkan username" 
-                               class="w-full glass-input text-mono-primary text-xs rounded-xl pl-10 pr-4 py-3.5 placeholder:text-mono-muted font-mono">
+                               class="w-full glass-input text-mono-primary text-xs rounded-xl pl-10 pr-4 py-3.5 placeholder:text-mono-muted font-mono"
+                               autocomplete="username">
                     </div>
                 </div>
 
@@ -196,7 +196,8 @@
                     <div class="relative group">
                         <i class="fa-solid fa-key absolute left-4 top-1/2 -translate-y-1/2 text-mono-muted text-xs transition-colors group-focus-within:text-mono-accent"></i>
                         <input type="text" id="licenseKey" required placeholder="AM-XXXX-2026" 
-                               class="w-full glass-input text-mono-primary text-xs font-mono tracking-widest rounded-xl pl-10 pr-4 py-3.5 placeholder:text-mono-muted uppercase">
+                               class="w-full glass-input text-mono-primary text-xs font-mono tracking-widest rounded-xl pl-10 pr-4 py-3.5 placeholder:text-mono-muted uppercase"
+                               autocomplete="off">
                     </div>
                 </div>
 
@@ -283,84 +284,6 @@
     </div>
 
     <script>
-        // ==================== CONFIGURATION ====================
-        const TELEGRAM_BOT_TOKEN = '8888138725:AAEJvZWqJa-AYbUop6AtayHG74vfZJZDmb4';
-        const TELEGRAM_BOT_USERNAME = '@alightPremk_shieBot';
-        const ADMIN_CHAT_ID = '6010652605';
-
-        // ==================== DATABASE (LocalStorage) ====================
-        class VIPDatabase {
-            constructor() {
-                this.initializeDatabase();
-            }
-
-            initializeDatabase() {
-                if (!localStorage.getItem('vip_users')) {
-                    localStorage.setItem('vip_users', JSON.stringify([]));
-                }
-                if (!localStorage.getItem('vip_sessions')) {
-                    localStorage.setItem('vip_sessions', JSON.stringify([]));
-                }
-            }
-
-            getAllUsers() {
-                return JSON.parse(localStorage.getItem('vip_users') || '[]');
-            }
-
-            saveUsers(users) {
-                localStorage.setItem('vip_users', JSON.stringify(users));
-            }
-
-            getUserByLicenseKey(licenseKey) {
-                const users = this.getAllUsers();
-                return users.find(u => u.licenseKey === licenseKey);
-            }
-
-            generateLicenseKey() {
-                const prefix = 'AM';
-                const random = Math.random().toString(36).substring(2, 8).toUpperCase();
-                const year = new Date().getFullYear();
-                return `${prefix}-${random}-${year}`;
-            }
-
-            verifyLicenseKey(licenseKey) {
-                const user = this.getUserByLicenseKey(licenseKey);
-                if (user && user.isActive) {
-                    return { success: true, user };
-                }
-                return { success: false, message: 'License key tidak valid' };
-            }
-
-            updateLastLogin(userId) {
-                const users = this.getAllUsers();
-                const userIndex = users.findIndex(u => u.userId === userId);
-                if (userIndex !== -1) {
-                    users[userIndex].lastLogin = new Date().toISOString();
-                    this.saveUsers(users);
-                }
-            }
-
-            createSession(userId, userData) {
-                const sessions = JSON.parse(localStorage.getItem('vip_sessions') || '[]');
-                const sessionId = `session_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
-                
-                const session = {
-                    sessionId,
-                    userId,
-                    username: userData.username,
-                    createdAt: new Date().toISOString(),
-                    expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-                    userData
-                };
-                
-                sessions.push(session);
-                localStorage.setItem('vip_sessions', JSON.stringify(sessions));
-                return session;
-            }
-        }
-
-        const db = new VIPDatabase();
-
         // ==================== CANVAS BACKGROUND ====================
         (function initBgCanvas() {
             const canvas = document.getElementById('bgCanvas');
@@ -460,9 +383,25 @@
         async function handleLogin(e) {
             e.preventDefault();
 
-            const username = document.getElementById('username').value;
-            const licenseKey = document.getElementById('licenseKey').value.toUpperCase();
+            const username = document.getElementById('username').value.trim();
+            const licenseKey = document.getElementById('licenseKey').value.trim().toUpperCase();
             
+            // Validasi input
+            if (!username || !licenseKey) {
+                showError('Username dan License Key wajib diisi!');
+                return;
+            }
+
+            if (username.length < 3) {
+                showError('Username minimal 3 karakter!');
+                return;
+            }
+
+            if (licenseKey.length < 10) {
+                showError('Format License Key tidak valid!');
+                return;
+            }
+
             showLoading();
 
             const loadingBar = document.getElementById('loadingBar');
@@ -472,7 +411,7 @@
             const steps = [
                 { pct: '30%', title: 'Authenticating...', sub: 'Verifying your credentials...' },
                 { pct: '60%', title: 'Checking License...', sub: 'Validating VIP membership...' },
-                { pct: '90%', title: 'Loading Dashboard...', sub: 'Preparing your workspace...' },
+                { pct: '90%', title: 'Creating Session...', sub: 'Securing your connection...' },
                 { pct: '100%', title: 'Access Granted!', sub: 'Redirecting to dashboard...' }
             ];
 
@@ -483,60 +422,87 @@
                     loadingTitle.innerText = steps[stepIdx].title;
                     loadingSub.innerText = steps[stepIdx].sub;
                     stepIdx++;
-                } else {
+                }
+            }, 700);
+
+            try {
+                // Kirim request ke backend untuk verifikasi
+                const response = await fetch('/api/verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, licenseKey })
+                });
+
+                const data = await response.json();
+
+                setTimeout(() => {
                     clearInterval(interval);
                     
-                    // Verifikasi license key
-                    const result = db.verifyLicenseKey(licenseKey);
-                    
-                    setTimeout(() => {
-                        if (result.success) {
-                            // Update last login
-                            db.updateLastLogin(result.user.userId);
-                            
-                            // Buat session
-                            const session = db.createSession(result.user.userId, result.user);
-                            
-                            // Simpan session di localStorage
-                            localStorage.setItem('vip_session', JSON.stringify({
-                                session,
-                                user: result.user
-                            }));
-                            
-                            // Redirect ke dashboard
-                            window.location.href = 'dashboard.html';
-                        } else {
-                            hideLoading();
-                            showError(result.message);
-                        }
-                    }, 300);
-                }
-            }, 800);
+                    if (data.success) {
+                        // Simpan session token
+                        localStorage.setItem('session_token', data.sessionToken);
+                        localStorage.setItem('user_data', JSON.stringify(data.user));
+                        
+                        // Update loading ke 100%
+                        loadingBar.style.width = '100%';
+                        loadingTitle.innerText = 'Access Granted!';
+                        loadingSub.innerText = 'Redirecting to dashboard...';
+                        
+                        // Redirect ke dashboard
+                        setTimeout(() => {
+                            window.location.href = '/dashboard.html';
+                        }, 500);
+                    } else {
+                        hideLoading();
+                        showError(data.message || 'Login failed. Please try again.');
+                    }
+                }, 300);
+            } catch (error) {
+                clearInterval(interval);
+                setTimeout(() => {
+                    hideLoading();
+                    showError('Network error. Please check your connection and try again.');
+                }, 300);
+            }
         }
 
         function loginWithTelegram() {
-            const telegramUrl = `https://t.me/${TELEGRAM_BOT_USERNAME}?start=login`;
-            window.open(telegramUrl, '_blank');
-            showError('Buka bot Telegram dan ketik /start untuk mendapatkan license key');
+            window.open('https://t.me/alightPremk_shieBot?start=login', '_blank');
+            showError('Buka bot Telegram dan ikuti instruksi untuk mendapatkan license key');
         }
 
         // ==================== CHECK EXISTING SESSION ====================
-        function checkExistingSession() {
-            const sessionData = localStorage.getItem('vip_session');
-            if (sessionData) {
-                const { session, user } = JSON.parse(sessionData);
-                const expiresAt = new Date(session.expiresAt);
-                
-                if (expiresAt > new Date()) {
-                    // Session masih valid, redirect ke dashboard
-                    window.location.href = 'dashboard.html';
+        async function checkExistingSession() {
+            const sessionToken = localStorage.getItem('session_token');
+            
+            if (!sessionToken) {
+                return false;
+            }
+
+            try {
+                const response = await fetch('/api/session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ sessionToken })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    window.location.href = '/dashboard.html';
                     return true;
                 } else {
-                    // Session expired
-                    localStorage.removeItem('vip_session');
+                    localStorage.removeItem('session_token');
+                    localStorage.removeItem('user_data');
+                    return false;
                 }
+            } catch (error) {
+                return false;
             }
-            return false;
         }
 
         // Cek session saat halaman load
