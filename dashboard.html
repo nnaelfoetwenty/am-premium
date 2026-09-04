@@ -497,7 +497,7 @@
     <!-- JAVASCRIPT CONTROLLER LOGIC -->
     <script>
         // ==================== SESSION CHECK ====================
-        async function checkSession() {
+        function checkSession() {
             const sessionToken = localStorage.getItem('session_token');
             
             if (!sessionToken) {
@@ -505,36 +505,13 @@
                 return false;
             }
 
-            try {
-                const response = await fetch('/api/session', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ sessionToken })
-                });
-
-                const data = await response.json();
-
-                if (!data.success) {
-                    localStorage.removeItem('session_token');
-                    localStorage.removeItem('user_data');
-                    window.location.href = '/index.html';
-                    return false;
-                }
-
-                // Update profile info
-                const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
-                if (userData.username) {
-                    document.getElementById('profileUsername').textContent = userData.username;
-                }
-
-                return true;
-            } catch (error) {
-                console.error('Session check error:', error);
-                window.location.href = '/index.html';
-                return false;
+            // Update profile info
+            const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
+            if (userData.username) {
+                document.getElementById('profileUsername').textContent = userData.username;
             }
+
+            return true;
         }
 
         function logout() {
@@ -888,8 +865,8 @@
         }
 
         // Initialize on page load
-        window.addEventListener('DOMContentLoaded', async () => {
-            const isValidSession = await checkSession();
+        window.addEventListener('DOMContentLoaded', () => {
+            const isValidSession = checkSession();
             if (isValidSession) {
                 const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
                 if (userData.username) {
