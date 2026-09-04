@@ -1,3 +1,4 @@
+```markdown
 # Alight Motion VIP - Premium Login System
 
 Sistem login premium dengan verifikasi license key dan integrasi Telegram Bot yang aman menggunakan Vercel Serverless Functions.
@@ -17,6 +18,7 @@ Sistem login premium dengan verifikasi license key dan integrasi Telegram Bot ya
 
 ## 🏗️ Struktur Project
 
+```
 
 alight-motion-vip/
 ├── index.html              # Halaman login
@@ -272,9 +274,6 @@ curl https://api.telegram.org/bot{YOUR_BOT_TOKEN}/deleteWebhook
 
 # Set webhook baru
 curl -X POST "https://api.telegram.org/bot{YOUR_BOT_TOKEN}/setWebhook?url=https://your-app.vercel.app/api/telegram"
-'''
-
-
 ```
 
 Session selalu expired:
@@ -300,11 +299,11 @@ Dibuat oleh: k_shie
 Version: 1.0.0
 Last Updated: 2026
 
-
+```
 
 ## **`.env.example`** (Template Environment Variables):
 
-env
+```env
 # .env.example
 # Copy file ini ke .env dan isi dengan values Anda
 
@@ -317,9 +316,11 @@ SESSION_SECRET=your_random_secret_string_here
 
 # SynoxCloud API
 SYNOX_API_KEY=FREE
+```
 
 .gitignore:
 
+```gitignore
 # Dependencies
 node_modules/
 
@@ -353,3 +354,4 @@ Thumbs.db
 dist/
 build/
 out/
+```
