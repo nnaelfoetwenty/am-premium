@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alight Motion Pro - Official VIP License Verification</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        mono: {
+                            base: '#000000',
+                            secondary: '#0A0A0A',
+                            card: '#111111',
+                            border: '#252525',
+                            primary: '#FFFFFF',
+                            secondarytext: '#A0A0A0',
+                            muted: '#666666',
+                            accent: '#D9D9D9',
+                            hover: '#FFFFFF',
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulseGlow 4s infinite ease-in-out',
+                        'float': 'float 6s infinite ease-in-out',
+                        'shimmer': 'shimmer 3s infinite linear',
+                        'modal-pop': 'modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'slide-up': 'slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'nav-bounce': 'navBounce 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'icon-spin': 'iconSpin 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'ripple': 'ripple 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                        'glow-pulse': 'glowPulse 1.5s ease-in-out',
+                        'particle-burst': 'particleBurst 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                    },
+                    keyframes: {
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 25px rgba(217, 217, 217, 0.05), inset 0 1px 1px rgba(255, 255, 255, 0.05)' },
+                            '50%': { boxShadow: '0 0 50px rgba(217, 217, 217, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.1)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' }
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        modalPop: {
+                            '0%': { transform: 'scale(0.9)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        navBounce: {
+                            '0%': { transform: 'scale(0.8)' },
+                            '50%': { transform: 'scale(1.1)' },
+                            '70%': { transform: 'scale(0.95)' },
+                            '100%': { transform: 'scale(1)' },
+                        },
+                        iconSpin: {
+                            '0%': { transform: 'rotate(0deg) scale(1)' },
+                            '50%': { transform: 'rotate(180deg) scale(1.3)' },
+                            '100%': { transform: 'rotate(360deg) scale(1)' },
+                        },
+                        ripple: {
+                            '0%': { transform: 'scale(0)', opacity: '0.6' },
+                            '100%': { transform: 'scale(2)', opacity: '0' },
+                        },
+                        glowPulse: {
+                            '0%, 100%': { boxShadow: '0 0 10px rgba(217, 217, 217, 0.3)' },
+                            '50%': { boxShadow: '0 0 30px rgba(217, 217, 217, 0.6)' },
+                        },
+                        particleBurst: {
+                            '0%': { transform: 'scale(1) rotate(0deg)', opacity: '1' },
+                            '100%': { transform: 'scale(2) rotate(45deg)', opacity: '0' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .liquid-glass {
+                background: rgba(17, 17, 17, 0.95);
+                backdrop-filter: blur(24px) saturate(100%);
+                -webkit-backdrop-filter: blur(24px) saturate(100%);
+                border: 1px solid #252525;
+            }
+            .glass-input {
+                background: #0A0A0A;
+                border: 1px solid #252525;
+                backdrop-filter: blur(12px);
+                transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .glass-input:focus {
+                border-color: #D9D9D9;
+                box-shadow: 0 0 25px rgba(217, 217, 217, 0.1), inset 0 0 10px rgba(255, 255, 255, 0.05);
+                outline: none;
+            }
+            .btn-premium {
+                background: #D9D9D9;
+                box-shadow: 0 10px 35px rgba(217, 217, 217, 0.1), inset 0 1px 2px rgba(255, 255, 255, 0.5);
+                transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .btn-premium:hover {
+                background: #FFFFFF;
+                transform: translateY(-2px);
+                box-shadow: 0 15px 45px rgba(255, 255, 255, 0.2), inset 0 1px 3px rgba(255, 255, 255, 0.8);
+            }
+            .shimmer-text {
+                background: linear-gradient(90deg, #FFFFFF 0%, #A0A0A0 40%, #FFFFFF 80%);
+                background-size: 200% 100%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .custom-scrollbar::-webkit-scrollbar {
+                width: 4px;
+            }
+            .custom-scrollbar::-webkit-scrollbar-thumb {
+                background: #333333;
+                border-radius: 10px;
+            }
+            .animate-modal-pop {
+                animation: modalPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .animate-slide-up {
+                animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            }
+            .animate-nav-bounce {
+                animation: navBounce 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .animate-icon-spin {
+                animation: iconSpin 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-item-active {
+                background: #1A1A1A;
+                border: 1px solid #333333;
+                box-shadow: 0 4px 15px rgba(217, 217, 217, 0.1);
+                animation: navBounce 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            }
+            .nav-item-active::after {
+                content: '';
+                position: absolute;
+                bottom: -1px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 20px;
+                height: 2px;
+                background: #D9D9D9;
+                border-radius: 2px;
+                animation: glowPulse 1.5s ease-in-out infinite;
+            }
+            .ripple-effect {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(217, 217, 217, 0.3);
+                transform: scale(0);
+                animation: ripple 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+                pointer-events: none;
+            }
+        }
+        
+        .modal-transition {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-mono-base text-mono-primary font-sans selection:bg-mono-accent selection:text-mono-base min-h-screen flex items-center justify-center p-4 relative overflow-x-hidden pb-20">
+
+    <!-- CANVAS BACKGROUND PARTICLE SYSTEM -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <canvas id="bgCanvas" class="w-full h-full block"></canvas>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(217,217,217,0.03),transparent_70%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(217,217,217,0.02),transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(rgba(217,217,217,0.02)_1px,transparent_1px)] [background-size:28px_28px] opacity-30"></div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="relative z-10 w-full max-w-md my-6">
+        
+        <!-- MAIN FORM CARD -->
+        <div class="liquid-glass rounded-[32px] p-7 sm:p-9 border border-mono-border relative overflow-hidden animate-pulse-glow">
+            
+            <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-mono-accent/40 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-mono-border to-transparent"></div>
+
+            <!-- HEADER BRANDING -->
+            <div class="text-center space-y-4 mb-8">
+                <div class="relative mx-auto w-fit animate-float">
+                    <div class="absolute -inset-2 bg-gradient-to-tr from-mono-accent/20 via-transparent to-transparent rounded-3xl blur-lg"></div>
+                    <div class="relative overflow-hidden rounded-2xl border border-mono-border shadow-2xl">
+                        <img src="https://files.catbox.moe/1rb6jq.jpg" alt="Alight Motion VIP Server" class="block max-w-full h-auto" style="width: auto; height: auto;" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=\'w-24 h-24 bg-mono-secondary rounded-2xl border border-mono-border flex items-center justify-center text-mono-primary font-bold\'>AM VIP</div>';">
+                    </div>
+                </div>
+
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mono-secondary border border-mono-border text-[10px] font-mono tracking-widest text-mono-secondarytext uppercase mb-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-mono-accent animate-ping"></span>
+                        <span>Alight Motion VIP Server</span>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight shimmer-text animate-shimmer">
+                        Verifikasi Lisensi VIP
+                    </h1>
+                    <p class="text-xs text-mono-secondarytext mt-1 font-normal leading-relaxed">
+                        Masukkan email untuk aktivasi <span class="text-mono-primary font-semibold">Alight Motion Pro Lifetime</span>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- VERIFICATION FORM -->
+            <form id="verifyForm" onsubmit="handleVerification(event)" class="space-y-5">
+                
+                <!-- Input Email -->
+                <div>
+                    <label class="block text-[11px] font-semibold text-mono-secondarytext uppercase tracking-wider mb-2">Email Akun Google / AM ID</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-mono-muted text-xs"></i>
+                        <input type="email" id="userEmail" required placeholder="nama@gmail.com" class="w-full glass-input text-mono-primary text-xs rounded-xl pl-10 pr-4 py-3.5 placeholder:text-mono-muted font-mono">
+                    </div>
+                </div>
+
+                <!-- Tombol Generate Premium -->
+                <button type="button" id="generateBtn" onclick="generatePremium()" class="w-full btn-premium text-mono-base py-4 rounded-xl text-xs font-extrabold tracking-wider uppercase flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Generate Premium Link</span>
+                </button>
+
+                <!-- Step 2: Verification Link (Hidden by default) -->
+                <div id="step2" class="hidden space-y-5">
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-[11px] font-semibold text-mono-secondarytext uppercase tracking-wider">Verification Link</label>
+                            <span class="text-[10px] font-mono text-mono-muted">Dari Email</span>
+                        </div>
+                        <div class="relative">
+                            <i class="fa-solid fa-link absolute left-4 top-1/2 -translate-y-1/2 text-mono-muted text-xs"></i>
+                            <input type="text" id="verificationLink" required placeholder="https://alight-creative.firebaseapp.com/__/auth/links?link=..." class="w-full glass-input text-mono-primary text-xs font-mono rounded-xl pl-10 pr-4 py-3.5 placeholder:text-mono-muted">
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" id="submitBtn" class="w-full btn-premium text-mono-base py-4 rounded-xl text-xs font-extrabold tracking-wider uppercase flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-shield-check"></i>
+                        <span>Verifikasi & Aktivasi</span>
+                    </button>
+                </div>
+
+                <!-- Status Area -->
+                <div id="statusArea" class="hidden p-3 rounded-xl bg-mono-secondary border border-mono-border text-xs">
+                    <div id="statusMessage" class="text-mono-secondarytext text-center"></div>
+                </div>
+
+                <!-- Unlocked Features Preview -->
+                <div class="p-4 rounded-2xl bg-mono-secondary border border-mono-border space-y-2.5">
+                    <div class="text-[10px] font-mono uppercase text-mono-secondarytext tracking-wider flex items-center justify-between">
+                        <span>Akses Fitur Terbuka:</span>
+                        <span class="text-mono-accent"><i class="fa-solid fa-lock-open text-[10px] mr-1"></i> Lifetime</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-[11px] text-mono-secondarytext">
+                        <div class="flex items-center gap-1.5 truncate">
+                            <i class="fa-solid fa-circle-check text-mono-accent text-xs"></i>
+                            <span>Tanpa Watermark</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 truncate">
+                            <i class="fa-solid fa-circle-check text-mono-accent text-xs"></i>
+                            <span>Akses Efek XML</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 truncate">
+                            <i class="fa-solid fa-circle-check text-mono-accent text-xs"></i>
+                            <span>Export 4K 60FPS</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 truncate">
+                            <i class="fa-solid fa-circle-check text-mono-accent text-xs"></i>
+                            <span>Cloud Project 50GB</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- FOOTER INFO -->
+            <div class="mt-6 pt-4 border-t border-mono-border flex items-center justify-between text-[10px] text-mono-muted font-mono">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-mono-accent"></span>
+                    SERVER VERIFIED
+                </span>
+                <span class="flex items-center gap-2">
+                    <i class="fa-brands fa-telegram text-mono-accent"></i>
+                    <span class="text-mono-muted">Support:</span>
+                    <a href="https://t.me/k_shie" target="_blank" class="text-mono-primary font-semibold hover:text-mono-accent transition-colors">@k_shie</a>
+                </span>
+            </div>
+            <div class="mt-2 text-center text-[9px] text-mono-muted font-mono tracking-wider">
+                © 2026 Alight Motion VIP • by <span class="text-mono-secondarytext">k_shie</span>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- BOTTOM NAVIGATION -->
+    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[95%] max-w-md">
+        <div class="liquid-glass rounded-2xl p-2 flex items-center justify-around border border-mono-border shadow-2xl">
+            <button id="navHome" onclick="navigateTo('home', this, event)" class="nav-item-active nav-item relative flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 text-mono-primary">
+                <i class="fa-solid fa-house text-sm"></i>
+                <span class="text-[9px] font-semibold tracking-wider">HOME</span>
+            </button>
+            <button id="navWhatsNew" onclick="navigateTo('whatsnew', this, event)" class="nav-item relative flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 text-mono-muted hover:text-mono-primary hover:bg-mono-secondary">
+                <i class="fa-solid fa-bolt text-sm"></i>
+                <span class="text-[9px] font-semibold tracking-wider">WHAT'S NEW</span>
+            </button>
+            <button id="navInfo" onclick="navigateTo('info', this, event)" class="nav-item relative flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 text-mono-muted hover:text-mono-primary hover:bg-mono-secondary">
+                <i class="fa-solid fa-circle-info text-sm"></i>
+                <span class="text-[9px] font-semibold tracking-wider">INFO</span>
+            </button>
+            <button id="navUser" onclick="navigateTo('user', this, event)" class="nav-item relative flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 text-mono-muted hover:text-mono-primary hover:bg-mono-secondary">
+                <i class="fa-solid fa-user text-sm"></i>
+                <span class="text-[9px] font-semibold tracking-wider">USER</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MODAL: WHAT'S NEW -->
+    <div id="whatsNewModal" class="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/80 backdrop-blur-2xl hidden modal-transition" style="opacity: 0;">
+        <div class="liquid-glass max-w-md w-full rounded-t-[32px] rounded-b-2xl p-6 border border-mono-border space-y-4 animate-slide-up max-h-[80vh] overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-mono-primary flex items-center gap-2">
+                    <i class="fa-solid fa-bolt text-mono-accent animate-icon-spin"></i>
+                    What's New
+                </h3>
+                <button onclick="closeModal('whatsNewModal')" class="w-8 h-8 rounded-full bg-mono-secondary border border-mono-border flex items-center justify-center text-mono-muted hover:text-mono-primary transition-all hover:rotate-90 duration-300">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="p-3 rounded-xl bg-mono-secondary border border-mono-border hover:border-mono-accent transition-all duration-300">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-[9px] font-mono bg-mono-accent text-mono-base px-2 py-0.5 rounded-full font-bold">NEW</span>
+                        <span class="text-xs font-semibold text-mono-primary">Version 2026.1</span>
+                    </div>
+                    <p class="text-[11px] text-mono-secondarytext">Update terbaru dengan peningkatan performa dan stabilitas server.</p>
+                </div>
+                
+                <div class="p-3 rounded-xl bg-mono-secondary border border-mono-border hover:border-mono-accent transition-all duration-300">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-[9px] font-mono bg-mono-accent text-mono-base px-2 py-0.5 rounded-full font-bold">UPDATE</span>
+                        <span class="text-xs font-semibold text-mono-primary">Fitur Baru</span>
+                    </div>
+                    <p class="text-[11px] text-mono-secondarytext">Penambahan preset efek XML premium dan dukungan export 4K 60FPS.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: INFORMATION -->
+    <div id="informationModal" class="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/80 backdrop-blur-2xl hidden modal-transition" style="opacity: 0;">
+        <div class="liquid-glass max-w-md w-full rounded-t-[32px] rounded-b-2xl p-6 border border-mono-border space-y-4 animate-slide-up max-h-[80vh] overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-mono-primary flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info text-mono-accent animate-icon-spin"></i>
+                    Informasi
+                </h3>
+                <button onclick="closeModal('informationModal')" class="w-8 h-8 rounded-full bg-mono-secondary border border-mono-border flex items-center justify-center text-mono-muted hover:text-mono-primary transition-all hover:rotate-90 duration-300">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="p-3 rounded-xl bg-mono-secondary border border-mono-border">
+                    <div class="text-[11px] text-mono-secondarytext space-y-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-server text-mono-accent w-4"></i>
+                            <span>Server Status:</span>
+                            <span class="text-mono-primary font-semibold">Online</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-brands fa-telegram text-mono-accent w-4"></i>
+                            <span>Support:</span>
+                            <a href="https://t.me/k_shie" target="_blank" class="text-mono-primary font-semibold">@k_shie</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: USER PROFILE -->
+    <div id="userProfileModal" class="fixed inset-0 z-50 flex items-end justify-center p-4 bg-black/80 backdrop-blur-2xl hidden modal-transition" style="opacity: 0;">
+        <div class="liquid-glass max-w-md w-full rounded-t-[32px] rounded-b-2xl p-6 border border-mono-border space-y-4 animate-slide-up max-h-[80vh] overflow-y-auto custom-scrollbar">
+            <div class="flex items-center justify-between">
+                <h3 class="text-lg font-bold text-mono-primary flex items-center gap-2">
+                    <i class="fa-solid fa-user text-mono-accent animate-icon-spin"></i>
+                    User Profile
+                </h3>
+                <button onclick="closeModal('userProfileModal')" class="w-8 h-8 rounded-full bg-mono-secondary border border-mono-border flex items-center justify-center text-mono-muted hover:text-mono-primary transition-all hover:rotate-90 duration-300">
+                    <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+            </div>
+            
+            <div class="space-y-3">
+                <div class="p-4 rounded-xl bg-mono-secondary border border-mono-border text-center space-y-2">
+                    <div class="w-16 h-16 mx-auto rounded-full bg-mono-card border border-mono-border flex items-center justify-center text-mono-accent text-2xl">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-semibold text-mono-primary" id="profileEmail">Guest User</p>
+                        <p class="text-[10px] text-mono-muted" id="profileStatus">Belum terverifikasi</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOADING OVERLAY -->
+    <div id="loadingOverlay" class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/90 backdrop-blur-2xl hidden opacity-0 transition-opacity duration-300">
+        <div class="liquid-glass max-w-sm w-full rounded-3xl p-6 border border-mono-border text-center space-y-5 relative overflow-hidden">
+            <div class="w-14 h-14 mx-auto rounded-full border-2 border-mono-border border-t-mono-accent animate-spin flex items-center justify-center">
+                <i class="fa-solid fa-shield-halved text-mono-primary text-sm"></i>
+            </div>
+            <div>
+                <h3 id="progressTitle" class="text-sm font-bold text-mono-primary mb-1 font-mono">Menghubungkan Server...</h3>
+                <p id="progressSub" class="text-xs text-mono-secondarytext font-mono">Memvalidasi sertifikat lisensi...</p>
+            </div>
+            <div class="w-full bg-mono-secondary rounded-full h-1.5 overflow-hidden border border-mono-border">
+                <div id="progressBar" class="bg-mono-accent h-full w-0 transition-all duration-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="fixed inset-0 z-[70] flex items-center justify-center p-4 bg-black/95 backdrop-blur-3xl hidden opacity-0 transition-opacity duration-300">
+        <div class="liquid-glass max-w-sm w-full rounded-[32px] p-7 border border-mono-border text-center space-y-5 relative overflow-hidden">
+            
+            <div class="absolute -top-16 -left-16 w-32 h-32 bg-mono-accent/10 rounded-full blur-3xl"></div>
+
+            <div class="w-16 h-16 mx-auto rounded-full bg-mono-secondary border border-mono-border flex items-center justify-center text-mono-accent text-2xl shadow-2xl">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+
+            <div class="space-y-1">
+                <h3 class="text-xl font-extrabold text-mono-primary tracking-tight">Verifikasi Berhasil</h3>
+                <p class="text-xs text-mono-secondarytext leading-relaxed">
+                    Lisensi <span class="text-mono-primary font-bold">Alight Motion VIP Pro</span> telah dikaitkan ke akun Anda.
+                </p>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-mono-secondary border border-mono-border font-mono text-[11px] text-mono-secondarytext space-y-1.5 text-left">
+                <div class="text-mono-muted text-[10px] uppercase font-bold tracking-wider mb-1">Rincian Lisensi Active:</div>
+                <div class="flex justify-between">
+                    <span class="text-mono-muted">Target Email:</span>
+                    <span id="resEmail" class="text-mono-primary font-medium truncate max-w-[150px]"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-mono-muted">Masa Berlaku:</span>
+                    <span class="text-mono-accent font-semibold">Lifetime Membership</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-mono-muted">Job ID:</span>
+                    <span id="resJobId" class="text-mono-secondarytext truncate max-w-[150px]"></span>
+                </div>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full btn-premium text-mono-base py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider">
+                Selesai
+            </button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CONTROLLER LOGIC -->
+    <script>
+        // ==================== SYNOXCLOUD API INTEGRATION ====================
+        const SYNOX_API = {
+            baseURL: 'https://api.synoxcloud.xyz/am',
+            apiKey: 'FREE',
+            
+            async generatePremium(email) {
+                const response = await fetch(`${this.baseURL}/send`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        gmail: email,
+                        apikey: this.apiKey
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                return await response.json();
+            },
+            
+            async verifyPremium(jobId, link) {
+                const response = await fetch(`${this.baseURL}/verif`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        jobId: jobId,
+                        link: link,
+                        apikey: this.apiKey
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                return await response.json();
+            }
+        };
+
+        // ==================== STATE ====================
+        let currentJobId = null;
+
+        // ==================== CANVAS BACKGROUND ====================
+        (function initBgCanvas() {
+            const canvas = document.getElementById('bgCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = [];
+            const particleCount = 30;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 1.5 + 0.5,
+                    alpha: Math.random() * 0.3 + 0.05,
+                    vx: (Math.random() - 0.5) * 0.3,
+                    vy: (Math.random() - 0.5) * 0.3
+                });
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, width, height);
+
+                for (let i = 0; i < particles.length; i++) {
+                    const p = particles[i];
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(217, 217, 217, ${p.alpha})`;
+                    ctx.fill();
+
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const p2 = particles[j];
+                        const dx = p.x - p2.x;
+                        const dy = p.y - p2.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 120) {
+                            ctx.beginPath();
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(p2.x, p2.y);
+                            ctx.strokeStyle = `rgba(217, 217, 217, ${0.03 * (1 - dist / 120)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                requestAnimationFrame(draw);
+            }
+
+            draw();
+        })();
+
+        // ==================== NAVIGATION ====================
+        function navigateTo(page, element, event) {
+            if (!event) {
+                event = window.event || { clientX: 0, clientY: 0 };
+            }
+            
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                item.classList.remove('nav-item-active');
+                item.classList.remove('text-mono-primary');
+                item.classList.add('text-mono-muted');
+            });
+
+            element.classList.add('nav-item-active');
+            element.classList.add('text-mono-primary');
+            element.classList.remove('text-mono-muted');
+
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple-effect');
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            
+            const x = (event.clientX || rect.left + rect.width / 2) - rect.left;
+            const y = (event.clientY || rect.top + rect.height / 2) - rect.top;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (x - size / 2) + 'px';
+            ripple.style.top = (y - size / 2) + 'px';
+            element.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+
+            const icon = element.querySelector('i');
+            if (icon) {
+                icon.classList.add('animate-icon-spin');
+                setTimeout(() => {
+                    icon.classList.remove('animate-icon-spin');
+                }, 500);
+            }
+
+            switch(page) {
+                case 'home':
+                    closeAllModals();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    break;
+                case 'whatsnew':
+                    closeAllModals();
+                    setTimeout(() => showModal('whatsNewModal'), 100);
+                    break;
+                case 'info':
+                    closeAllModals();
+                    setTimeout(() => showModal('informationModal'), 100);
+                    break;
+                case 'user':
+                    closeAllModals();
+                    setTimeout(() => showModal('userProfileModal'), 100);
+                    break;
+            }
+        }
+
+        function showModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                modal.style.opacity = '1';
+            });
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.style.opacity = '0';
+            }, 300);
+        }
+
+        function closeAllModals() {
+            const modals = ['whatsNewModal', 'informationModal', 'userProfileModal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (modal && !modal.classList.contains('hidden')) {
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                    }, 300);
+                }
+            });
+        }
+
+        // ==================== API FUNCTIONS ====================
+        function showLoading(title, sub) {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const progressTitle = document.getElementById('progressTitle');
+            const progressSub = document.getElementById('progressSub');
+            const progressBar = document.getElementById('progressBar');
+            
+            progressTitle.innerText = title;
+            progressSub.innerText = sub;
+            progressBar.style.width = '0%';
+            
+            loadingOverlay.classList.remove('hidden');
+            setTimeout(() => loadingOverlay.classList.remove('opacity-0'), 10);
+        }
+
+        function hideLoading() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            loadingOverlay.classList.add('opacity-0');
+            setTimeout(() => loadingOverlay.classList.add('hidden'), 300);
+        }
+
+        function showStatus(message, type = 'info') {
+            const statusArea = document.getElementById('statusArea');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            statusArea.classList.remove('hidden');
+            statusMessage.innerText = message;
+            
+            if (type === 'success') {
+                statusMessage.className = 'text-green-400 text-center';
+            } else if (type === 'error') {
+                statusMessage.className = 'text-red-400 text-center';
+            } else {
+                statusMessage.className = 'text-mono-secondarytext text-center';
+            }
+        }
+
+        // STEP 1: Generate Premium
+        async function generatePremium() {
+            const email = document.getElementById('userEmail').value;
+            
+            if (!email) {
+                showStatus('Masukkan email terlebih dahulu!', 'error');
+                return;
+            }
+
+            showLoading('Menghubungi Server...', 'Mengirim permintaan premium...');
+
+            try {
+                const result = await SYNOX_API.generatePremium(email);
+                
+                console.log('Generate Premium Response:', result);
+                
+                // Ambil jobId dari response (bisa berbeda format)
+                currentJobId = result.jobId || result.job_id || result.data?.jobId || result.data?.job_id;
+                
+                hideLoading();
+                
+                if (currentJobId) {
+                    // Tampilkan step 2
+                    document.getElementById('step2').classList.remove('hidden');
+                    document.getElementById('generateBtn').classList.add('hidden');
+                    
+                    showStatus('✅ Email terkirim! Cek email kamu untuk verification link.', 'success');
+                    
+                    // Auto-fill jika ada link dari response
+                    if (result.link || result.data?.link) {
+                        document.getElementById('verificationLink').value = result.link || result.data?.link;
+                    }
+                } else {
+                    showStatus('⚠️ Gagal mendapatkan Job ID. Response: ' + JSON.stringify(result), 'error');
+                }
+            } catch (error) {
+                hideLoading();
+                console.error('Error:', error);
+                showStatus('❌ Gagal generate premium: ' + error.message, 'error');
+            }
+        }
+
+        // STEP 2: Verify Premium
+        async function handleVerification(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('userEmail').value;
+            const verificationLink = document.getElementById('verificationLink').value;
+            
+            if (!currentJobId) {
+                showStatus('❌ Job ID tidak ditemukan. Generate ulang!', 'error');
+                return;
+            }
+            
+            if (!verificationLink) {
+                showStatus('❌ Masukkan verification link dari email!', 'error');
+                return;
+            }
+
+            showLoading('Verifikasi Premium...', 'Mengaktifkan lisensi VIP...');
+
+            try {
+                const result = await SYNOX_API.verifyPremium(currentJobId, verificationLink);
+                
+                console.log('Verify Premium Response:', result);
+                
+                hideLoading();
+                
+                // Cek status sukses (bisa berbeda format)
+                const isSuccess = result.success || result.status === 'success' || result.message?.toLowerCase().includes('success');
+                
+                if (isSuccess || result.jobId || result.data) {
+                    // Simpan data premium
+                    const premiumData = {
+                        email: email,
+                        jobId: currentJobId,
+                        verifiedAt: new Date().toISOString(),
+                        status: 'premium',
+                        lifetime: true
+                    };
+                    
+                    localStorage.setItem('vip_premium_data', JSON.stringify(premiumData));
+                    
+                    // Update profile
+                    document.getElementById('profileEmail').innerText = email;
+                    document.getElementById('profileStatus').innerText = 'Premium Lifetime ✓';
+                    
+                    // Tampilkan success modal
+                    document.getElementById('resEmail').innerText = email;
+                    document.getElementById('resJobId').innerText = currentJobId;
+                    
+                    const successModal = document.getElementById('successModal');
+                    successModal.classList.remove('hidden');
+                    setTimeout(() => successModal.classList.remove('opacity-0'), 10);
+                    
+                    showStatus('🎉 Aktivasi berhasil!', 'success');
+                } else {
+                    showStatus('❌ Verifikasi gagal: ' + (result.message || 'Unknown error'), 'error');
+                }
+            } catch (error) {
+                hideLoading();
+                console.error('Error:', error);
+                showStatus('❌ Verifikasi gagal: ' + error.message, 'error');
+            }
+        }
+
+        function closeSuccessModal() {
+            const successModal = document.getElementById('successModal');
+            successModal.classList.add('opacity-0');
+            setTimeout(() => {
+                successModal.classList.add('hidden');
+                document.getElementById('verifyForm').reset();
+                document.getElementById('progressBar').style.width = '0%';
+                document.getElementById('step2').classList.add('hidden');
+                document.getElementById('generateBtn').classList.remove('hidden');
+                document.getElementById('statusArea').classList.add('hidden');
+                currentJobId = null;
+            }, 300);
+        }
+
+        // Check existing premium data
+        window.addEventListener('DOMContentLoaded', () => {
+            const premiumData = localStorage.getItem('vip_premium_data');
+            if (premiumData) {
+                const data = JSON.parse(premiumData);
+                document.getElementById('profileEmail').innerText = data.email;
+                document.getElementById('profileStatus').innerText = 'Premium Lifetime ✓';
+            }
+        });
+    </script>
+</body>
+</html>
