@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alight Motion Pro - Official VIP License Verification</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com">
-    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
@@ -334,6 +333,10 @@
                 <i class="fa-solid fa-user text-sm"></i>
                 <span class="text-[9px] font-semibold tracking-wider">USER</span>
             </button>
+            <button onclick="logout()" class="nav-item relative flex flex-col items-center gap-1 px-4 py-2 rounded-xl transition-all duration-300 text-mono-muted hover:text-red-500 hover:bg-mono-secondary">
+                <i class="fa-solid fa-sign-out-alt text-sm"></i>
+                <span class="text-[9px] font-semibold tracking-wider">LOGOUT</span>
+            </button>
         </div>
     </nav>
 
@@ -421,10 +424,13 @@
                         <i class="fa-solid fa-user"></i>
                     </div>
                     <div>
-                        <p class="text-sm font-semibold text-mono-primary" id="profileEmail">Guest User</p>
-                        <p class="text-[10px] text-mono-muted" id="profileStatus">Belum terverifikasi</p>
+                        <p class="text-sm font-semibold text-mono-primary" id="profileUsername">User VIP</p>
+                        <p class="text-[10px] text-mono-muted" id="profileStatus">Premium Lifetime ✓</p>
                     </div>
                 </div>
+                <button onclick="logout()" class="w-full bg-red-500/10 border border-red-500/30 text-red-500 py-3 rounded-xl text-xs font-bold hover:bg-red-500/20 transition-all">
+                    <i class="fa-solid fa-sign-out-alt mr-2"></i>Logout
+                </button>
             </div>
         </div>
     </div>
@@ -465,7 +471,11 @@
             <div class="p-4 rounded-2xl bg-mono-secondary border border-mono-border font-mono text-[11px] text-mono-secondarytext space-y-1.5 text-left">
                 <div class="text-mono-muted text-[10px] uppercase font-bold tracking-wider mb-1">Rincian Lisensi Active:</div>
                 <div class="flex justify-between">
-                    <span class="text-mono-muted">Target Email:</span>
+                    <span class="text-mono-muted">Username:</span>
+                    <span id="resUsername" class="text-mono-primary font-medium truncate max-w-[150px]"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-mono-muted">Email:</span>
                     <span id="resEmail" class="text-mono-primary font-medium truncate max-w-[150px]"></span>
                 </div>
                 <div class="flex justify-between">
@@ -473,8 +483,8 @@
                     <span class="text-mono-accent font-semibold">Lifetime Membership</span>
                 </div>
                 <div class="flex justify-between">
-                    <span class="text-mono-muted">Job ID:</span>
-                    <span id="resJobId" class="text-mono-secondarytext truncate max-w-[150px]"></span>
+                    <span class="text-mono-muted">Status:</span>
+                    <span class="text-green-400 font-semibold">Active</span>
                 </div>
             </div>
 
@@ -486,53 +496,52 @@
 
     <!-- JAVASCRIPT CONTROLLER LOGIC -->
     <script>
-        // ==================== SYNOXCLOUD API INTEGRATION ====================
-        const SYNOX_API = {
-            baseURL: 'https://api.synoxcloud.xyz/am',
-            apiKey: 'FREE',
+        // ==================== SESSION CHECK ====================
+        async function checkSession() {
+            const sessionToken = localStorage.getItem('session_token');
             
-            async generatePremium(email) {
-                const response = await fetch(`${this.baseURL}/send`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        gmail: email,
-                        apikey: this.apiKey
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                return await response.json();
-            },
-            
-            async verifyPremium(jobId, link) {
-                const response = await fetch(`${this.baseURL}/verif`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        jobId: jobId,
-                        link: link,
-                        apikey: this.apiKey
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
-                return await response.json();
+            if (!sessionToken) {
+                window.location.href = '/index.html';
+                return false;
             }
-        };
 
-        // ==================== STATE ====================
-        let currentJobId = null;
+            try {
+                const response = await fetch('/api/session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ sessionToken })
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    localStorage.removeItem('session_token');
+                    localStorage.removeItem('user_data');
+                    window.location.href = '/index.html';
+                    return false;
+                }
+
+                // Update profile info
+                const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
+                if (userData.username) {
+                    document.getElementById('profileUsername').textContent = userData.username;
+                }
+
+                return true;
+            } catch (error) {
+                console.error('Session check error:', error);
+                window.location.href = '/index.html';
+                return false;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('session_token');
+            localStorage.removeItem('user_data');
+            window.location.href = '/index.html';
+        }
 
         // ==================== CANVAS BACKGROUND ====================
         (function initBgCanvas() {
@@ -734,7 +743,9 @@
             }
         }
 
-        // STEP 1: Generate Premium
+        // ==================== SYNOXCLOUD API INTEGRATION ====================
+        let currentJobId = null;
+
         async function generatePremium() {
             const email = document.getElementById('userEmail').value;
             
@@ -743,19 +754,35 @@
                 return;
             }
 
+            // Validasi email format
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showStatus('Format email tidak valid!', 'error');
+                return;
+            }
+
             showLoading('Menghubungi Server...', 'Mengirim permintaan premium...');
 
             try {
-                const result = await SYNOX_API.generatePremium(email);
+                // Panggil backend API untuk generate premium
+                const response = await fetch('/api/synox-generate', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const result = await response.json();
                 
-                console.log('Generate Premium Response:', result);
-                
-                // Ambil jobId dari response (bisa berbeda format)
-                currentJobId = result.jobId || result.job_id || result.data?.jobId || result.data?.job_id;
+                console.log('Generate Response:', result);
                 
                 hideLoading();
                 
-                if (currentJobId) {
+                if (result.success && result.jobId) {
+                    // Simpan jobId
+                    currentJobId = result.jobId;
+                    
                     // Tampilkan step 2
                     document.getElementById('step2').classList.remove('hidden');
                     document.getElementById('generateBtn').classList.add('hidden');
@@ -763,11 +790,11 @@
                     showStatus('✅ Email terkirim! Cek email kamu untuk verification link.', 'success');
                     
                     // Auto-fill jika ada link dari response
-                    if (result.link || result.data?.link) {
-                        document.getElementById('verificationLink').value = result.link || result.data?.link;
+                    if (result.data?.link) {
+                        document.getElementById('verificationLink').value = result.data.link;
                     }
                 } else {
-                    showStatus('⚠️ Gagal mendapatkan Job ID. Response: ' + JSON.stringify(result), 'error');
+                    showStatus('⚠️ ' + (result.message || 'Gagal generate premium'), 'error');
                 }
             } catch (error) {
                 hideLoading();
@@ -776,7 +803,6 @@
             }
         }
 
-        // STEP 2: Verify Premium
         async function handleVerification(e) {
             e.preventDefault();
             
@@ -793,37 +819,44 @@
                 return;
             }
 
+            // Validasi link format
+            if (!verificationLink.startsWith('http')) {
+                showStatus('❌ Format verification link tidak valid!', 'error');
+                return;
+            }
+
             showLoading('Verifikasi Premium...', 'Mengaktifkan lisensi VIP...');
 
             try {
-                const result = await SYNOX_API.verifyPremium(currentJobId, verificationLink);
+                // Panggil backend API untuk verifikasi
+                const response = await fetch('/api/synox-verify', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ 
+                        email,
+                        jobId: currentJobId,
+                        verificationLink 
+                    })
+                });
+
+                const result = await response.json();
                 
-                console.log('Verify Premium Response:', result);
+                console.log('Verify Response:', result);
                 
                 hideLoading();
                 
-                // Cek status sukses (bisa berbeda format)
-                const isSuccess = result.success || result.status === 'success' || result.message?.toLowerCase().includes('success');
-                
-                if (isSuccess || result.jobId || result.data) {
-                    // Simpan data premium
-                    const premiumData = {
-                        email: email,
-                        jobId: currentJobId,
-                        verifiedAt: new Date().toISOString(),
-                        status: 'premium',
-                        lifetime: true
-                    };
-                    
-                    localStorage.setItem('vip_premium_data', JSON.stringify(premiumData));
-                    
+                if (result.success) {
                     // Update profile
-                    document.getElementById('profileEmail').innerText = email;
-                    document.getElementById('profileStatus').innerText = 'Premium Lifetime ✓';
+                    const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
+                    const username = userData.username || 'User VIP';
+                    document.getElementById('profileUsername').textContent = username;
+                    document.getElementById('profileStatus').textContent = 'Premium Lifetime ✓';
                     
                     // Tampilkan success modal
-                    document.getElementById('resEmail').innerText = email;
-                    document.getElementById('resJobId').innerText = currentJobId;
+                    document.getElementById('resUsername').textContent = username;
+                    document.getElementById('resEmail').textContent = email;
                     
                     const successModal = document.getElementById('successModal');
                     successModal.classList.remove('hidden');
@@ -831,7 +864,7 @@
                     
                     showStatus('🎉 Aktivasi berhasil!', 'success');
                 } else {
-                    showStatus('❌ Verifikasi gagal: ' + (result.message || 'Unknown error'), 'error');
+                    showStatus('❌ ' + (result.message || 'Verifikasi gagal'), 'error');
                 }
             } catch (error) {
                 hideLoading();
@@ -854,13 +887,15 @@
             }, 300);
         }
 
-        // Check existing premium data
-        window.addEventListener('DOMContentLoaded', () => {
-            const premiumData = localStorage.getItem('vip_premium_data');
-            if (premiumData) {
-                const data = JSON.parse(premiumData);
-                document.getElementById('profileEmail').innerText = data.email;
-                document.getElementById('profileStatus').innerText = 'Premium Lifetime ✓';
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', async () => {
+            const isValidSession = await checkSession();
+            if (isValidSession) {
+                const userData = JSON.parse(localStorage.getItem('user_data') || '{}');
+                if (userData.username) {
+                    document.getElementById('profileUsername').textContent = userData.username;
+                    document.getElementById('profileStatus').textContent = 'Premium Lifetime ✓';
+                }
             }
         });
     </script>
