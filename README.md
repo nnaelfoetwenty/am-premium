@@ -1,4 +1,3 @@
-```markdown
 # Alight Motion VIP - Premium Login System
 
 Sistem login premium dengan verifikasi license key dan integrasi Telegram Bot yang aman menggunakan Vercel Serverless Functions.
