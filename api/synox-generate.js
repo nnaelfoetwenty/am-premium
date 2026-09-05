@@ -3,6 +3,11 @@
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Konfigurasi (fallback ke value di kode jika env variable tidak diset)
+const SYNOX_API_KEY = process.env.SYNOX_API_KEY || 'FREE';
+const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN || '8888138725:AAEJvZWqJa-AYbUop6AtayHG74vfZJZDmb4';
+const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID || '6010652605';
+
 export default async function handler(req, res) {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -34,16 +39,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Pastikan API key server tersedia — jangan fallback ke 'FREE'
-    const synoxApiKey = process.env.SYNOX_API_KEY;
-    if (!synoxApiKey) {
-      console.error('SYNOX_API_KEY tidak diset di environment variables');
-      return res.status(500).json({
-        success: false,
-        message: 'Konfigurasi server tidak lengkap: SYNOX_API_KEY belum diset'
-      });
-    }
-
     // Panggil SynoxCloud API
     let synoxResponse;
     try {
@@ -54,7 +49,7 @@ export default async function handler(req, res) {
         },
         body: JSON.stringify({
           gmail: email,
-          apikey: synoxApiKey
+          apikey: SYNOX_API_KEY
         })
       });
     } catch (networkError) {
@@ -68,12 +63,10 @@ export default async function handler(req, res) {
     // Parse response dengan aman (SynoxCloud bisa saja tidak mengembalikan JSON valid)
     const rawText = await synoxResponse.text();
     let synoxData = null;
-    let parseError = null;
 
     try {
       synoxData = rawText ? JSON.parse(rawText) : {};
     } catch (err) {
-      parseError = err;
       synoxData = null;
     }
 
@@ -113,8 +106,6 @@ export default async function handler(req, res) {
       });
     }
 
-    // Belum tentu "error" murni — ambil pesan asli dari SynoxCloud jika tersedia,
-    // sebelum menganggapnya sebagai kegagalan generik
     const synoxMessage =
       synoxData.message ??
       synoxData.error ??
@@ -139,10 +130,7 @@ export default async function handler(req, res) {
 
 // Helper: Notifikasi ke admin via Telegram
 async function notifyAdminGenerate(email, synoxData) {
-  const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const adminChatId = process.env.ADMIN_CHAT_ID;
-
-  if (!botToken || !adminChatId) {
+  if (!TELEGRAM_BOT_TOKEN || !ADMIN_CHAT_ID) {
     console.log('Telegram credentials not configured');
     return;
   }
@@ -161,11 +149,11 @@ async function notifyAdminGenerate(email, synoxData) {
                    `⏰ Waktu: ${new Date().toLocaleString('id-ID')}\n\n` +
                    `📦 Response: \`${JSON.stringify(synoxData).substring(0, 200)}\``;
 
-    await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        chat_id: adminChatId,
+        chat_id: ADMIN_CHAT_ID,
         text: message,
         parse_mode: 'Markdown'
       })
